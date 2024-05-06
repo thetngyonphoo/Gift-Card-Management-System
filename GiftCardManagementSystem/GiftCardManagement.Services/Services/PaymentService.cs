@@ -40,7 +40,9 @@ namespace GiftCardManagement.Services.Services
                 {
                     PaymentTypeList type = new PaymentTypeList();
                     type.PaymentType = item.PaymentType;
-                    type.DiscountPercentage = item.DiscountPercentage;                    
+                    type.DiscountPercentage = item.DiscountPercentage;
+
+                    responses.PaymentTypeList.Add(type);
                     responses.StatusCode = StatusCodes.Status200OK;
                 }
             }
