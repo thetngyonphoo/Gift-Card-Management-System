@@ -8,13 +8,13 @@ using GiftCardManagement.Services.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Drawing;
 using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ZXing.QrCode.Internal;
 
 namespace GiftCardManagement.Services.Services
 {
@@ -28,7 +28,7 @@ namespace GiftCardManagement.Services.Services
             _dbContext = dbContext;
             _iConfiguration = configuration;
         }
-       
+
         public async Task<PromoCodeResponse> GetPromoCode()
         {
             PromoCodeResponse responses = new PromoCodeResponse();
@@ -44,6 +44,8 @@ namespace GiftCardManagement.Services.Services
                     codes.Code = item.Code;
                     codes.QRCode = item.QRCode;
                     codes.PhoneNumber = item.PhoneNumber;
+
+                    responses.PromoCodeList.Add(codes);
                     responses.StatusCode = StatusCodes.Status200OK;
                 }
             }
@@ -68,7 +70,7 @@ namespace GiftCardManagement.Services.Services
                     response.Id = promoCode.Id;
                     response.Code = promoCode.Code;
                     response.QRCode = promoCode.QRCode;
-                    response.PhoneNumber = promoCode.PhoneNumber;                   
+                    response.PhoneNumber = promoCode.PhoneNumber;
                     response.StatusCode = StatusCodes.Status200OK;
                 }
                 return response;
@@ -87,11 +89,11 @@ namespace GiftCardManagement.Services.Services
         public async Task<ResponseStatus> SavePromoCode(SavePromoCodeRequest request, int currentLoginID)
         {
             try
-            {                
+            {
                 PromoCode codes = new PromoCode();
 
                 bool isValidCode = IsValidPromoCode(request.Code);
-                if(!isValidCode)
+                if (!isValidCode)
                 {
                     return new ResponseStatus
                     {
@@ -101,7 +103,7 @@ namespace GiftCardManagement.Services.Services
                 }
 
                 var isExistCode = await _dbContext.PromoCode.AnyAsync(x => x.IsActive == true && x.Code == request.Code);
-                if(isExistCode)
+                if (isExistCode)
                 {
                     return new ResponseStatus
                     {
@@ -112,9 +114,9 @@ namespace GiftCardManagement.Services.Services
 
                 codes.Code = request.Code;
                 codes.PhoneNumber = request.PhoneNumber;
-                codes.QRCode = "qrCodePath";
 
-               // string qrCodePath = GenerateQRCode(request.Code);
+                string qrCodeString = GenerateQRCode(request.Code);
+                codes.QRCode = qrCodeString;
 
                 codes.CreatedBy = currentLoginID;
                 codes.CreatedDate = DateTime.Now;
@@ -167,40 +169,42 @@ namespace GiftCardManagement.Services.Services
             return true;
         }
 
-        //private string GenerateQRCode(string promoCode)
-        //{
-        //    QRCodeGenerator qrGenerator = new QRCodeGenerator();
-        //    QRCodeData qrCodeData = qrGenerator.CreateQrCode(promoCode, QRCodeGenerator.ECCLevel.Q);
-        //    QRCode qrCode = new QRCode(qrCodeData);
-        //    qrCode = qrCodeData;
-        //    string qrCodePath = $"qr_codes/{promoCode}.png";
-        //    using (FileStream stream = new FileStream(qrCodePath, FileMode.Create))
-        //    {
-        //        qrCode.SaveAsPng(stream);
-        //    }
-        //    return qrCodePath;
-        //}
+        private string GenerateQRCode(string promoCode)
+        {
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(promoCode, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            Image qrCodeImage = qrCode.GetGraphic(20);
 
+            // Convert image to byte array
+            var bytes = ImageToByteArray(qrCodeImage);
+
+            // Convert byte array to base64-encoded string
+            var base64String = Convert.ToBase64String(bytes);
+
+            return base64String;
+        }
+
+        public byte[] ImageToByteArray(System.Drawing.Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            return ms.ToArray();
+        }
 
         public async Task<ResponseStatus> UpdatePromoCode(UpdatePromoCodeRequest request, int currentLoginID)
         {
             try
             {
-                bool isValidCode = IsValidPromoCode(request.Code);
-                if (!isValidCode)
-                {
-                    return new ResponseStatus
-                    {
-                        StatusCode = StatusCodes.Status400BadRequest,
-                        Message = "Invalid Code!"
-                    };
-                }              
 
                 var codes = await _dbContext.PromoCode.Where(x => x.Id == request.Id && x.IsActive == true).FirstOrDefaultAsync();
                 if (codes != null)
                 {
-                    codes.Code = request.Code;
                     codes.PhoneNumber = request.PhoneNumber;
+
+                    string qrCodeString = GenerateQRCode(codes.Code);
+                    codes.QRCode = qrCodeString;
+
                     codes.QRCode = "qrCodePath";
                     // string qrCodePath = GenerateQRCode(request.Code);
 

@@ -10,8 +10,7 @@ namespace GiftCardManagement.Data.Dtos.Request
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public DateTime ExpiryDate { get; set; }
-        public string GiftCardNo { get; set; }
+        public DateTime ExpiryDate { get; set; }       
         public Double Amount { get; set; }
         public int Quantity { get; set; }
         public int TypeOfBuyingId { get; set; }

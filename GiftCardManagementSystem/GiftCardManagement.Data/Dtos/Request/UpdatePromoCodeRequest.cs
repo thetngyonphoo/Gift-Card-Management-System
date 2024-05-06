@@ -8,8 +8,7 @@ namespace GiftCardManagement.Data.Dtos.Request
 {
     public class UpdatePromoCodeRequest
     {
-        public int Id { get; set; }
-        public string Code { get; set; }
+        public int Id { get; set; }        
         public string PhoneNumber { get; set; }
     }
 }

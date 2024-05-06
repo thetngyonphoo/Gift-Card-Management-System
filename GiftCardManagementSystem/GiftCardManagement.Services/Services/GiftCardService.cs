@@ -191,19 +191,10 @@ namespace GiftCardManagement.Services.Services
                 var giftCard = await _dbContext.GiftCard.Where(x => x.Id == request.Id && x.IsActive == true).FirstOrDefaultAsync();
 
                 if (giftCard != null)
-                {
-                    if (giftCard.GiftCardNo == request.GiftCardNo)
-                    {
-                        return new ResponseStatus
-                        {
-                            StatusCode = StatusCodes.Status400BadRequest,
-                            Message = "Gift Card No already exist!"
-                        };
-                    }
+                {                   
 
                     giftCard.Title = request.Title;
-                    giftCard.ExpiryDate = request.ExpiryDate;
-                    giftCard.GiftCardNo = request.GiftCardNo;
+                    giftCard.ExpiryDate = request.ExpiryDate;                    
                     giftCard.Amount = request.Amount;
                     giftCard.Quantity = request.Quantity;
                     giftCard.TypeOfBuyingId = request.TypeOfBuyingId;
