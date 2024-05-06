@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiftCardManagementSystem", "GiftCardManagementSystem\GiftCardManagementSystem.csproj", "{89909378-B3A3-4635-906C-4B28AB4F4615}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiftCardManagement.Data", "GiftCardManagement.Data\GiftCardManagement.Data.csproj", "{C1D40474-4223-4A7F-9CBD-CDE3B0994104}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GiftCardManagement.Services", "GiftCardManagement.Services\GiftCardManagement.Services.csproj", "{823A4B19-A71B-4AB6-BC89-2AE3DC7BF61C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89909378-B3A3-4635-906C-4B28AB4F4615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89909378-B3A3-4635-906C-4B28AB4F4615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89909378-B3A3-4635-906C-4B28AB4F4615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89909378-B3A3-4635-906C-4B28AB4F4615}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1D40474-4223-4A7F-9CBD-CDE3B0994104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D40474-4223-4A7F-9CBD-CDE3B0994104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D40474-4223-4A7F-9CBD-CDE3B0994104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D40474-4223-4A7F-9CBD-CDE3B0994104}.Release|Any CPU.Build.0 = Release|Any CPU
+		{823A4B19-A71B-4AB6-BC89-2AE3DC7BF61C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{823A4B19-A71B-4AB6-BC89-2AE3DC7BF61C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{823A4B19-A71B-4AB6-BC89-2AE3DC7BF61C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{823A4B19-A71B-4AB6-BC89-2AE3DC7BF61C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C1D569BF-EF82-4AF9-B511-F63B441719BA}
+	EndGlobalSection
+EndGlobal
