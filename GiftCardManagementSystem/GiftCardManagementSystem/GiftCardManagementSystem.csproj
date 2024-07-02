@@ -16,6 +16,8 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Syncfusion.Licensing" Version="26.1.40" />
+    <PackageReference Include="Syncfusion.XlsIO.Net.Core" Version="26.1.40" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.1" />
   </ItemGroup>
 

@@ -87,9 +87,13 @@ builder.Services.AddScoped<IGiftCardService, GiftCardService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IPromoCodeService, PromoCodeService>();
 builder.Services.AddScoped<ICheckoutService, CheckoutService>();
+builder.Services.AddScoped<IExcelExportService, ExcelExportService>();
 #endregion
 
 var app = builder.Build();
+
+//Register Syncfusion license
+//Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("YOUR LICENSE KEY");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
